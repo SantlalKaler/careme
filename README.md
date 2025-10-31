@@ -10,12 +10,21 @@ This app demonstrates a clean **MVVM architecture**, dynamic configuration-drive
 Care4Me allows users to search customers based on multiple fields such as first name, last name, date of birth, city, and more.  
 The search system is **configuration-driven**, meaning new search fields can be added without modifying any ViewModel or UI logic.
 
+| Splash Screen | Home Screen | Search Screen |
+|----------------|----------------|------------------|
+| ![Splash Screen](assets/screenshots/splash.png) | ![Home Screent](screenshots/home.png) | ![Search Screen](screenshots/customer_detail.png) |
+
+| Filter in Search Screen | Details Screen |
+|-----------------|--------------|
+| ![Filter Screen](screenshots/refresh_indicator.png) | ![Details Screen](screenshots/date_picker.png) |
+
+
 ---
 
 ## 2. Tech Stack and Packages
 
 **Framework:** Flutter 3.32.8  
-**IDE:** Android Studio  
+**IDE:** Android Studio & Xcode
 **Architecture Pattern:** MVVM (Model-View-ViewModel)
 
 **Core Packages Used:**
@@ -31,12 +40,12 @@ intl: ^0.20.2
 ---
 Why These Packages
 
-**Riverpod:** State management and dependency injection for ViewModels and Providers.
-**Dio:** Network layer abstraction for REST API integration and local JSON server calls.
-**GoRouter:** Navigation with support for route parameters and typed data passing.
-**Intl:** Date formatting for consistent yyyy-MM-dd storage and display.
-**Gap & Cupertino Icons:** Lightweight UI spacing and icon consistency across iOS/Android.
-**Google Fonts:** Modern typography and consistent cross-platform UI.
+> - **Riverpod:** State management and dependency injection for ViewModels and Providers.
+> - **Dio:** Network layer abstraction for REST API integration and local JSON server calls.
+> - **GoRouter:** Navigation with support for route parameters and typed data passing.
+> - **Intl:** Date formatting for consistent yyyy-MM-dd storage and display.
+> - **Gap & Cupertino Icons:** Lightweight UI spacing and icon consistency across iOS/Android.
+> - **Google Fonts:** Modern typography and consistent cross-platform UI.
 
 
 ## 2. Setup and Run Instructions
@@ -47,7 +56,7 @@ Node.js (for running local JSON server)
 
 **Clone and Install**
 ```bash
-git clone <repo-url>
+git clone https://github.com/SantlalKaler/careme.git
 cd care4me
 flutter pub get
 ```
@@ -165,7 +174,7 @@ dynamic _getFieldValue(Customer customer, String key) {
 
 ## 6. How to Add a New Search Field
 Adding a new field requires no UI or logic changes.
-Simply edit the configuration in search_config_provider.dart:
+Simply edit the configuration in search_config.dart:
 
 ```dart
 'maritalStatus': FieldConfig(
@@ -176,13 +185,67 @@ Simply edit the configuration in search_config_provider.dart:
 ),
 ```
 
-Once added:
- > The new chip will appear automatically.
- > The form field renders dynamically.
- > The filtering logic adapts instantly.
+**Once added:**
+> - The new chip will appear automatically.
+> -  The form field renders dynamically.
+> - The filtering logic adapts instantly.
+
+## 7. Architectural Decisions and Trade-offs
+
+**Pattern: MVVM**
+> -  Model: Data classes (Customer, Address, etc.)
+> -  ViewModel: State management, filtering, API calls.
+> - View: Reactive UI built using Riverpod’s ConsumerWidget and ConsumerState.
+
+**State Management**
+> -  Riverpod was chosen for fine-grained reactivity and testability.
+> -  Clear separation of UI state (StateNotifier) and data providers.
 
 
+**Networking**
+> -  Dio chosen for structured interceptors, error handling, and scalability.
+> - **API calls used for:**
+> - Fetching all customers
+> - Fetching single customer details
+> - Filtering handled locally to minimize API overhead.
 
+**Trade-offs**
+> - Local filtering increases memory usage for large datasets but provides instant UX.
+> - Config-driven design adds slight complexity but enables long-term flexibility.
+> - JSON Server used for simplicity; can easily be replaced by real backend later.
+
+
+## 8. Platform Notes
+**Android**
+> - No special configuration required.
+> - Tested on Android 15 emulator & on a real device.
+
+**iOS**
+> Make sure CocoaPods are updated:
+```bash
+cd ios
+pod install
+```
+> Run on iOS Simulator:
+```bash
+flutter run -d "iPhone 15 Pro"
+```
+
+## 9. Optional Media
+
+**Include screenshots:**
+> - Dynamic chip rendering
+> - Search filter working
+> - Pull-to-refresh
+> - Customer detail view
+
+## 10. Summary
+**Care4Me demonstrates:**
+> - MVVM pattern with Riverpod
+> - Config-driven UI generation
+> - Local filtering logic
+> - Clean network handling via Dio
+> - Dynamic, scalable search system ready for production integration.
 
 
 
