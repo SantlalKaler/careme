@@ -12,11 +12,11 @@ The search system is **configuration-driven**, meaning new search fields can be 
 
 | Splash Screen | Home Screen | Search Screen |
 |----------------|----------------|------------------|
-| ![Splash Screen](assets/screenshots/splash.png) | ![Home Screent](screenshots/home.png) | ![Search Screen](screenshots/customer_detail.png) |
+| ![Splash Screen](assets/screenshots/splash.png) | ![Home Screent](assets/screenshots/home.png) | ![Search Screen](assets/screenshots/search.png) |
 
 | Filter in Search Screen | Details Screen |
 |-----------------|--------------|
-| ![Filter Screen](screenshots/refresh_indicator.png) | ![Details Screen](screenshots/date_picker.png) |
+| ![Filter Screen](assets/screenshots/filter.png) | ![Details Screen](assets/details/date_picker.png) |
 
 
 ---
