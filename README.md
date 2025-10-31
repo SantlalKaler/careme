@@ -1,16 +1,29 @@
-# careme
+# Care4Me
 
-A new Flutter project.
+A Flutter-based customer search application built for the Care247 assignment.  
+This app demonstrates a clean **MVVM architecture**, dynamic configuration-driven UI generation, and local filtering with remote API integration for fetching customer data.
 
-## Getting Started
+---
 
-This project is a starting point for a Flutter application.
+## 1. Overview
 
-A few resources to get you started if this is your first Flutter project:
+Care4Me allows users to search customers based on multiple fields such as first name, last name, date of birth, city, and more.  
+The search system is **configuration-driven**, meaning new search fields can be added without modifying any ViewModel or UI logic.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 2. Tech Stack and Packages
+
+**Framework:** Flutter 3.32.8  
+**IDE:** Android Studio  
+**Architecture Pattern:** MVVM (Model-View-ViewModel)
+
+**Core Packages Used:**
+```yaml
+cupertino_icons: ^1.0.8
+google_fonts: ^6.3.2
+flutter_riverpod: ^3.0.3
+go_router: ^16.3.0
+gap: ^3.0.1
+dio: ^5.9.0
+intl: ^0.20.2
