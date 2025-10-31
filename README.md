@@ -16,7 +16,7 @@ The search system is **configuration-driven**, meaning new search fields can be 
 
 | Filter in Search Screen | Details Screen |
 |-----------------|--------------|
-| ![Filter Screen](assets/screenshots/filter.png) | ![Details Screen](assets/details/date_picker.png) |
+| ![Filter Screen](assets/screenshots/filter.png) | ![Details Screen](assets/screenshots/details.png) |
 
 
 ---
