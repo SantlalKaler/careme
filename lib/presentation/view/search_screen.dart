@@ -1,4 +1,3 @@
-import 'package:careme/core/constants/route_names.dart';
 import 'package:careme/core/widget/app_loader.dart';
 import 'package:careme/presentation/viewmodel/customer_viewmodel.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,8 +8,10 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../core/config/search_config.dart';
+import '../../core/constants/route_names.dart';
 import '../../core/widget/app_error.dart';
 import '../../core/widget/icon_with_data.dart';
+import '../../core/widget/json_viewer.dart';
 import '../../data/model/field_config.dart';
 
 class SearchScreen extends ConsumerStatefulWidget {
@@ -31,6 +32,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
 
   final sortedFields = searchConfig.entries.toList()
     ..sort((a, b) => a.value.renderOrder.compareTo(b.value.renderOrder));
+  TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +54,47 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
             padding: const EdgeInsets.symmetric(horizontal: 16),
             child: Column(
               children: [
-                SearchForm(),
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: searchController,
+                        decoration: InputDecoration(
+                          labelText: "Search",
+                          hintText: "Search",
+                          border: const OutlineInputBorder(),
+                        ),
+                        onChanged: (value) {
+                          ref
+                              .read(customerViewModelProvider.notifier)
+                              .filterCustomersGlobally(value);
+                        },
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        searchController.clear();
+                        ref
+                            .read(customerViewModelProvider.notifier)
+                            .clearFilters();
+                      },
+                      icon: Icon(
+                        Icons.filter_alt_off_sharp,
+                        color: Theme.of(context).primaryColor,
+                      ),
+                    ),
+                    /* TextButton(
+              onPressed: () {
+                resetData(ref);
+
+                ref
+                    .read(selectedFieldProvider.notifier)
+                    .update((state) => null);
+              },
+              child: Text("Clear Filter"),
+            ),*/
+                  ],
+                ),
                 Gap(16),
                 state.isLoading
                     ? Center(child: AppLoader())
@@ -159,6 +201,12 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                                                   .number ??
                                               "",
                                         ),
+                                        ExpandableSection(
+                                          title: "More Details",
+                                          child: JsonViewer(
+                                            jsonMap: customer.toJson(),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ),
@@ -178,7 +226,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
 }
 
 class SearchForm extends ConsumerWidget {
-  const SearchForm({super.key});
+  SearchForm({super.key});
 
   resetData(WidgetRef ref) {
     ref.read(customerViewModelProvider.notifier).filterCustomers({}, {});
@@ -200,8 +248,30 @@ class SearchForm extends ConsumerWidget {
       children: [
         Row(
           children: [
-            Expanded(child: Text("Search By: ")),
-            TextButton(
+            Expanded(
+              child: TextField(
+                decoration: InputDecoration(
+                  labelText: "Search",
+                  hintText: "Search",
+                  border: const OutlineInputBorder(),
+                ),
+                onChanged: (value) {
+                  ref
+                      .read(customerViewModelProvider.notifier)
+                      .filterCustomersGlobally(value);
+                },
+              ),
+            ),
+            IconButton(
+              onPressed: () {
+                ref.read(customerViewModelProvider.notifier).clearFilters();
+              },
+              icon: Icon(
+                Icons.filter_alt_off_sharp,
+                color: Theme.of(context).primaryColor,
+              ),
+            ),
+            /* TextButton(
               onPressed: () {
                 resetData(ref);
 
@@ -210,10 +280,10 @@ class SearchForm extends ConsumerWidget {
                     .update((state) => null);
               },
               child: Text("Clear Filter"),
-            ),
+            ),*/
           ],
         ),
-        SingleChildScrollView(
+        /* SingleChildScrollView(
           scrollDirection: Axis.horizontal,
           child: Row(
             children: sortedFields.map((entry) {
@@ -242,7 +312,7 @@ class SearchForm extends ConsumerWidget {
 
         const SizedBox(height: 16),
         if (selectedField != null)
-          _buildFieldInput(ref, selectedField, searchConfig[selectedField]!),
+          _buildFieldInput(ref, selectedField, searchConfig[selectedField]!),*/
       ],
     );
   }

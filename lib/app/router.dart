@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../core/constants/route_names.dart';
+import '../presentation/view/edit_customer_screen.dart';
 import '../presentation/view/home_screen.dart';
 import '../presentation/view/splash_screen.dart';
 
@@ -28,6 +29,15 @@ final routerProvider = Provider<GoRouter>((ref) {
           String title = extra['title'] ?? '';
           String id = extra['id'] ?? '';
           return DetailsScreen(title: title, id: id);
+        },
+      ),
+
+      GoRoute(
+        path: RouteNames.edit,
+        builder: (context, state) {
+          Map<String, dynamic> customerData =
+              state.extra as Map<String, dynamic>;
+          return EditCustomerScreen(customerData: customerData);
         },
       ),
     ],

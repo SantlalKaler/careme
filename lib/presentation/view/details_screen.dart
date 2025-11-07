@@ -1,5 +1,6 @@
 import 'package:careme/app/theme/colors.dart';
 import 'package:careme/core/constants/app_images.dart';
+import 'package:careme/core/constants/route_names.dart';
 import 'package:careme/core/widget/app_loader.dart';
 import 'package:careme/core/widget/icon_with_data.dart';
 import 'package:flutter/cupertino.dart';
@@ -45,6 +46,20 @@ class _DetailsScreenState extends ConsumerState<DetailsScreen> {
           widget.title,
           style: Theme.of(context).textTheme.titleMedium,
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              var state = ref.watch(customerViewModelProvider);
+              var customer = state.customer;
+              context.push(RouteNames.edit, extra: customer?.toJson());
+            },
+            icon: Icon(
+              Icons.edit,
+              size: 24,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+          ),
+        ],
       ),
       body: Consumer(
         builder: (context, ref, child) {

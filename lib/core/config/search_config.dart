@@ -24,16 +24,17 @@ final searchConfig = {
     label: 'Date of Birth',
     renderOrder: 3,
   ),
+  'addresses.city': FieldConfig(
+    type: 'text',
+    label: 'City',
+    placeholder: 'City',
+    renderOrder: 5,
+  ),
   /*  'maritalStatus': FieldConfig(
     type: 'text',
     label: 'Marital Status',
     placeholder: 'Enter marital status',
     renderOrder: 4,
   ),
-  'addresses.city': FieldConfig(
-    type: 'text',
-    label: 'City',
-    placeholder: 'City',
-    renderOrder: 5,
-  ),*/
+  */
 };

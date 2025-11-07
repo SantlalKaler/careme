@@ -93,4 +93,42 @@ class AuthViewModel extends StateNotifier<CustomerState> {
     }
     return map[key];
   }
+
+  void filterCustomersGlobally(String query) {
+    final allCustomers = state.customers ?? [];
+    if (allCustomers.isEmpty) return;
+
+    final normalizedQuery = query.toLowerCase().trim();
+    if (normalizedQuery.isEmpty) {
+      state = state.copyWith(filteredCustomers: allCustomers);
+      return;
+    }
+
+    final filtered = allCustomers.where((customer) {
+      final jsonMap = customer.toJson();
+
+      bool matches(dynamic value) {
+        if (value == null) return false;
+
+        if (value is String) {
+          return value.toLowerCase().contains(normalizedQuery);
+        } else if (value is num || value is bool) {
+          return value.toString().toLowerCase().contains(normalizedQuery);
+        } else if (value is Map<String, dynamic>) {
+          return value.values.any(matches);
+        } else if (value is List) {
+          return value.any(matches);
+        }
+        return false;
+      }
+
+      return jsonMap.values.any(matches);
+    }).toList();
+
+    state = state.copyWith(filteredCustomers: filtered);
+  }
+
+  void clearFilters() {
+    state = state.copyWith(filteredCustomers: state.customers);
+  }
 }
