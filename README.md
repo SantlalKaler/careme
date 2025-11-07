@@ -12,11 +12,11 @@ The search system is **configuration-driven**, meaning new search fields can be 
 
 | Splash Screen | Home Screen | Search Screen |
 |----------------|----------------|------------------|
-| ![Splash Screen](assets/screenshots/splash.png) | ![Home Screent](screenshots/home.png) | ![Search Screen](screenshots/customer_detail.png) |
+| ![Splash Screen](assets/screenshots/splash.png) | ![Home Screent](assets/screenshots/home.png) | ![Search Screen](assets/screenshots/search.png) |
 
-| Filter in Search Screen | Details Screen |
-|-----------------|--------------|
-| ![Filter Screen](screenshots/refresh_indicator.png) | ![Details Screen](screenshots/date_picker.png) |
+| DOB Filter | First Name Filter | Details Screen |
+|-----------------|--------------|------------------|
+| ![Filter Screen](assets/screenshots/filter.png) | ![Filter Screen](assets/screenshots/filtername.png) | ![Details Screen](assets/screenshots/details.png) |
 
 
 ---
@@ -246,6 +246,41 @@ flutter run -d "iPhone 15 Pro"
 > - Local filtering logic
 > - Clean network handling via Dio
 > - Dynamic, scalable search system ready for production integration.
+
+
+## 11. Choice of Framework (Flutter) and Why
+
+> **Framework Chosen:** Flutter  
+> - Selected over React Native due to its superior performance, native rendering, and developer productivity.  
+> - Offers consistent UI and performance across both Android and iOS using a single codebase.  
+> - Eliminates the need for platform-specific UI adjustments thanks to its declarative widget system.  
+> - Built-in support for adaptive widgets (`Cupertino` and `Material`) ensures a native look and feel on both platforms.
+
+> **Reasons for Not Choosing React Native**
+> - React Native relies on a JavaScript bridge for native calls, which can introduce latency and inconsistency in animations.  
+> - Flutter compiles directly to native ARM code, resulting in faster load times and smoother UI.  
+> - Flutter provides a richer ecosystem of customizable UI components and better performance for animation-heavy apps.  
+> - Dependency management, tooling, and IDE integration (especially with Android Studio) are more mature in Flutter.
+
+> **Outcome**
+> - Faster development speed with hot reload and type-safe Dart language.  
+> - Unified architecture for both mobile platforms.  
+> - Clean and maintainable code structure aligned with enterprise MVVM standards.
+
+
+## 12. Time Spent on Assignment
+
+> **Total Duration**
+> - Approximately 1 full day (around 8–10 hours) spent on development, testing, and documentation.
+
+> **Breakdown**
+> - Project setup and MVVM structure: 2 hours  
+> - API integration with Dio and Riverpod state setup: 2 hours  
+> - UI development (config-driven search and filtering): 3 hours  
+> - Testing, polishing, and bug fixes: 1 hour  
+> - Writing README and documentation: 1–2 hours
+
+
 
 
 
